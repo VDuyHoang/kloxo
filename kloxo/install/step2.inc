@@ -120,6 +120,15 @@ install_mail() {
 }
 
 install_others() {
+	echo ">>> Add Kloxo-MR webmail/thirparty/stats <<<"
+
+	## MR -- it's include packages like kloxomr7-thirdparty
+	yum -y install kloxomr7-*.noarch
+
+	## MR -- regular packages (as the same as for Kloxo-MR 6.5.0)
+	yum -y install kloxomr-webmail-*.noarch kloxomr-thirdparty-*.noarch kloxomr-stats-*.noarch \
+		kloxomr-editor-*.noarch --exclude=kloxomr-thirdparty-phpmyadmin-*.noarch --skip-broken
+		
 	echo ">>> Install OTHER services <<<"
 
 	yum -y install pure-ftpd webalizer cronie cronie-anacron crontabs vixie-cron \
@@ -206,8 +215,9 @@ kloxo_install_step1() {
 	phpbranch='php'
 
 	for x in php php54 php55u php56u php54w php55w php56w ; do
-		if [ "$(rpm -qa ${x})" != "" ] ; then
+		if [ "$(rpm -qa ${x}-common)" != "" ] ; then
 			phpbranch=${x}
+			break
 		fi
 	done
 
@@ -221,16 +231,7 @@ kloxo_install_step1() {
 
 	echo ">>> Install MalDetect <<<"
 
-	sh /script/maldet-installer
-
-	echo ">>> Add Kloxo-MR webmail/thirparty/stats <<<"
-
-	## MR -- it's include packages like kloxomr7-thirdparty
-	yum -y install kloxomr7-*.noarch
-
-	## MR -- regular packages (as the same as for Kloxo-MR 6.5.0)
-	yum -y install kloxomr-webmail-*.noarch kloxomr-thirdparty-*.noarch kloxomr-stats-*.noarch \
-		kloxomr-editor-*.noarch --exclude=kloxomr-thirdparty-phpmyadmin-*.noarch --skip-broken
+	sh /script/maldet-installer	
 
 	echo ">>> Prepare installation directories <<<"
 
@@ -469,7 +470,7 @@ lxins_main() {
 	kloxo_install_step1
 
 	install_main
-
+	
 	if [ "${kloxostate}" == 'none' ] ; then
 		kloxo_install_step2
 	fi

@@ -108,5 +108,3 @@ else
 		sh ${ppath}/install/setup.sh $*  | tee ${ppath}/install/install.log
 	fi
 fi
-
-

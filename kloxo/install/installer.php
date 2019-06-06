@@ -166,7 +166,7 @@ function install_web()
 
 	print(">>> Installing Apache and Hiawatha<<<\n");
 
-	exec("yum list|grep ^httpd24u", $test);
+	exec("yum --disablerepo=* --enablerepo=mratwork-ius list|grep ^httpd24u", $test);
 
 	if (count($test) > 0) {
 		system("yum remove -y httpd-* mod_*");

@@ -55,7 +55,6 @@ else
 	'rm' -rf /etc/yum.repos.d/kloxo-custom.repo
 	'rm' -rf /etc/yum.repos.d/lxcenter.repo
 	'rm' -rf /etc/yum.repos.d/lxlabs.repo
-
 	'rm' -rf /etc/yum.repos.d/epel*.repo
 fi
 
@@ -161,12 +160,10 @@ cd /
 
 #yum clean all
 
-yum -y install wget zip unzip yum-utils yum-priorities yum-plugin-replace \
-	vim-minimal subversion curl sudo expect --skip-broken
-
 yum remove -y bind* nsd* pdns* mydns* yadifa* maradns djbdns* mysql* mariadb* MariaDB* php* \
 		httpd-* mod_* httpd24u* mod24u_* nginx* lighttpd* varnish* squid* trafficserver* \
 		*-toaster postfix* exim* opensmtpd* esmtp* libesmtp* libmhash*
+yum -y install redhat-lsb dhclient sudo wget zip unzip yum-utils yum-priorities yum-plugin-replace vim-minimal subversion curl sudo expect --skip-broken		
 rpm -e pure-ftpd --noscripts
 userdel postfix
 rpm -e vpopmail-toaster --noscripts
@@ -188,7 +185,7 @@ chown mysql:mysql /var/lib/mysqltmp
 sh /script/disable-mysql-aio
 sh /script/set-mysql-default
 
-if [ "$(yum list|grep ^'php56u')" != "" ] ; then
+if [ "$(yum --disablerepo=* --enablerepo=mratwork-ius-archive list|grep ^'php56u')" != "" ] ; then
 	phpused="php56"
 	yum -y install ${phpused}u-cli ${phpused}u-mysqlnd ${phpused}u-fpm
 else

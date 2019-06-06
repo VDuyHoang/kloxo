@@ -18,19 +18,12 @@ if [ ! -L /usr/bin/chkconfig ] ; then
 	ln -s /sbin/chkconfig /usr/bin/chkconfig
 fi
 
-if [ "$(rpm -qa sudo)" == "" ] ; then
-	## Add sudo
-	yum install -y sudo >/dev/null 2>&1
-fi
 
 if [ "$(cat /etc/yum.conf|grep 'sslverify')" != "" ] ; then
 	sed -i '/sslverify/d' /etc/yum.conf
 fi
 
 echo 'sslverify=false' >> /etc/yum.conf
-
-## MR -- importance for CentOS 6+ for cp/mv/rm
-# sh /script/disable-alias
 
 
 ## MR -- make install x86_64 only in 64bit OS
@@ -46,11 +39,6 @@ fi
 if [ "$(rpm -qa redhat-lsb)" == "" ] ; then
 	yum install -y redhat-lsb >/dev/null 2>&1
 fi
-
-if [ "$(rpm -qa dhclient)" == "" ] ; then
-	yum install -y dhclient >/dev/null 2>&1
-fi
-
 path='/etc/sysconfig/network-scripts'
 for x in $(dir -l ${path}/ifcfg-*|awk '{print $9}'|tr '\', ' ') ; do
 	if [ "$(cat ${x}|grep -i 'dhcp')" != "" ] ; then

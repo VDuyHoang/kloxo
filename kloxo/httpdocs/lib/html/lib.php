@@ -2865,7 +2865,7 @@ function checkIfLatest()
 
 function getLatestVersion()
 {
-	exec("yum check-update kloxomr7|grep kloxomr7|awk '{print $2}'", $out, $ret);
+	exec("yum --disablerepo=* --enablerepo=mratwork-release-neutral-noarch check-update kloxomr7|grep kloxomr7|awk '{print $2}'", $out, $ret);
 
 	if ($ret === 0) {
 		$ver = getInstalledVersion();
