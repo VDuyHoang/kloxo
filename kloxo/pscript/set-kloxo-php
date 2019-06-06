@@ -1,5 +1,3 @@
-#/bin/sh
-
 #!/bin/sh
 
 if [ "$1" == "--help" ] || [ "$1" == "-h" ] ; then
@@ -32,7 +30,7 @@ fi
 	chmod 0440 /etc/sudoers.d/mount
 #fi
 
-if [ "${2}" = 0 ] ; then
+if [ -z "${2}" ] ; then
 	echo "- No php selected. Defaulting to 'php56s'"
 	echo
 	echo "php56s" > /usr/local/lxlabs/kloxo/init/kloxo_php_active
