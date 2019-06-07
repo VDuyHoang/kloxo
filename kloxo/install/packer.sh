@@ -74,11 +74,11 @@ else
 	echo "No download and use local copy already exist"
 fi
 
-'cp' -rf ./kloxo/install/installer.sh ./
+'/usr/bin/cp' -rf ./kloxo/install/installer.sh ./
 
 ver=`cat ./kloxo/bin/kloxoversion`
 
-'mv' ./kloxo ./kloxomr7-$ver
+'/usr/bin/mv' ./kloxo ./kloxomr7-$ver
 
 # delete dirs except en-us
 find ./kloxomr7-$ver/httpdocs/lang/* -type d ! -name 'en-us' -exec rm -R {} \;

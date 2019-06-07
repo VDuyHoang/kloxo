@@ -6432,13 +6432,13 @@ function setInitialServer($nolog = null)
 
 	$list = implode(" ", $packages);
 
-	exec("yum -y remove $list >/dev/null 2>&1");
+	exec("yum -y remove $list");
 
 	$packages = array("kloxomr-webmail-*.noarch", "kloxomr7-thirdparty-*.noarch", "kloxomr-thirdparty-*.noarch", "kloxomr-stats-*.noarch", "kloxomr-editor-*.noarch", "hiawatha");
 
 	$list = implode(" ", $packages);
 
-	exec("yum -y install $list >/dev/null 2>&1");
+	exec("yum -y install $list");
 
 	exec("sh /script/fixlxphpexe");
 
@@ -8421,10 +8421,8 @@ function setAllWebServerInstall($nolog = null)
 					log_cleanup("- Replace for 'apache' (to 'httpd24u')", $nolog);
 				} else {
 					log_cleanup("- No process for 'apache' ('httpd24')", $nolog);
-				}
-
-				$conffile = getLinkCustomfile("{$confpath}", "httpd24.conf");
-				exec("'cp' -f {$conffile} /etc/httpd/conf/httpd.conf");
+				}				
+				lxfile_cp(getLinkCustomfile("{$confpath}", "httpd24.conf"),"/etc/httpd/conf/httpd.conf");				
 			} else {
 				if (isRpmInstalled('httpd24u')) {
 					if (file_exists("{$a24mpath}/00-base.conf")) {
@@ -8438,10 +8436,8 @@ function setAllWebServerInstall($nolog = null)
 					log_cleanup("- Replace for 'apache' (to 'httpd24u')", $nolog);
 				} else {
 					log_cleanup("- No process for 'apache' ('httpd')", $nolog);
-				}
-
-				$conffile = getLinkCustomfile("{$confpath}", "httpd.conf");
-				exec("'cp' -f {$conffile} /etc/httpd/conf/httpd.conf");
+				}				
+				lxfile_cp(getLinkCustomfile("{$confpath}", "httpd.conf"),"/etc/httpd/conf/httpd.conf");				
 			}
 
 			if (file_exists("../etc/flag/use_pagespeed.flg")) {

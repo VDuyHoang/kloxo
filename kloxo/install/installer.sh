@@ -29,8 +29,8 @@ if [ "$(rpm -qa mratwork-release)" == "" ] ; then
 	rpm -ivh mratwork-release-0.0.1-1.noarch.rpm >/dev/null 2>&1
 	yum update mratwork-release -y >/dev/null 2>&1
 
-	'mv' -f /etc/yum.repos.d/lxcenter.repo /etc/yum.repos.d/lxcenter.nonrepo >/dev/null 2>&1
-	'mv' -f /etc/yum.repos.d/kloxo-mr.repo /etc/yum.repos.d/kloxo-mr.nonrepo >/dev/null 2>&1
+	'/usr/bin/mv' -f /etc/yum.repos.d/lxcenter.repo /etc/yum.repos.d/lxcenter.nonrepo >/dev/null 2>&1
+	'/usr/bin/mv' -f /etc/yum.repos.d/kloxo-mr.repo /etc/yum.repos.d/kloxo-mr.nonrepo >/dev/null 2>&1
 else
 	yum update mratwork-release -y >/dev/null 2>&1
 fi
@@ -54,8 +54,8 @@ echo ""
 'rm' -rf ./kloxomr7*/ >/dev/null 2>&1
 echo "- extract tar.gz file and copy to /usr/local/lxlabs/kloxo"
 tar -xzf ./kloxomr7-*.tar.gz >/dev/null 2>&1
-'cp' -rf ./kloxomr7-*/* /usr/local/lxlabs/kloxo >/dev/null 2>&1
-'rm' -rf ./kloxomr7*/ >/dev/null 2>&1
+'/usr/bin/cp' -rf ./kloxomr7-*/* /usr/local/lxlabs/kloxo >/dev/null 2>&1
+'/usr/bin/rm' -rf ./kloxomr7*/ >/dev/null 2>&1
 
 echo ""
 echo "* Note:"

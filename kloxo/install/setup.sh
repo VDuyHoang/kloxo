@@ -163,10 +163,10 @@ cd /
 yum remove -y bind* nsd* pdns* mydns* yadifa* maradns djbdns* mysql* mariadb* MariaDB* php* \
 		httpd-* mod_* httpd24u* mod24u_* nginx* lighttpd* varnish* squid* trafficserver* \
 		*-toaster postfix* exim* opensmtpd* esmtp* libesmtp* libmhash*
-yum -y install redhat-lsb dhclient sudo wget zip unzip yum-utils yum-priorities yum-plugin-replace vim-minimal subversion curl sudo expect --skip-broken		
 rpm -e pure-ftpd --noscripts
 userdel postfix
 rpm -e vpopmail-toaster --noscripts
+yum -y install redhat-lsb dhclient sudo wget zip unzip yum-utils yum-priorities yum-plugin-replace vim-minimal subversion curl sudo expect --skip-broken		
 
 if id -u postfix >/dev/null 2>&1 ; then
 	userdel postfix
@@ -185,23 +185,28 @@ chown mysql:mysql /var/lib/mysqltmp
 sh /script/disable-mysql-aio
 sh /script/set-mysql-default
 
-if [ "$(yum --disablerepo=* --enablerepo=mratwork-ius-archive list|grep ^'php56u')" != "" ] ; then
-	phpused="php56"
-	yum -y install ${phpused}u-cli ${phpused}u-mysqlnd ${phpused}u-fpm
+# install latest php for kloxo panel
+phpused="$(yum list | grep -o "php5[0-9]u-cli" | tail -1)"
+if [ "$phpused" != "" ] ; then
+	phpused=${phpused:0:5}
+	yum -y install ${phpused}u ${phpused}u-cli ${phpused}u-mysqlnd ${phpused}u-fpm
 else
-	phpused="php54"
+    phpused="php54"
 	yum -y install ${phpused}-cli ${phpused}-mysqlnd ${phpused}-fpm
 fi
+
 
 chkconfig php-fpm on >/dev/null 2>&1
 	
 if [ "$(uname -m)" == "x86_64" ] ; then
 	ln -sf /usr/lib64/php /usr/lib/php
 fi
-
-mkdir -p /opt/${phpused}s/custom
-sh /script/phpm-installer ${phpused}s -y
-sh /script/fixlxphpexe ${phpused}s
+kloxophp="$(yum list | grep -o "php7[0-9]u-cli" | tail -1)"
+kloxophp=${kloxophp:0:5}
+mkdir -p /opt/${kloxophp}s/custom
+sh /script/set-kloxo-php cgi ${kloxophp}s
+#sh /script/phpm-installer ${kloxophp}s -y
+sh /script/fixlxphpexe ${kloxophp}s
 
 cd /
 
@@ -234,7 +239,7 @@ sh /script/setdriver --server=localhost --class=dns --driver=bind >/dev/null 2>&
 sh /script/setdriver --server=localhost --class=spam --driver=bogofilter >/dev/null 2>&1
 
 ## use php-cgi by default
-sh /script/set-kloxo-php >/dev/null 2>&1
+#sh /script/set-kloxo-php cgi ${kloxophp}s >/dev/null 2>&1
 
 sh /script/restart-all --force >/dev/null 2>&1
 

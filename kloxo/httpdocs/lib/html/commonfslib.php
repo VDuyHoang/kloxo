@@ -488,7 +488,7 @@ function lxfile_cp($src, $dst)
 	}
 
 	log_filesys("Copying $src $dst");
-	system("'cp' '-rf' '$src' '$dst'", $ret);
+	system("'/usr/bin/cp' '-rf' '$src' '$dst'", $ret);
 
 	return $ret == 0;
 }

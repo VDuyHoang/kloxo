@@ -46,14 +46,13 @@ fi
 
 if [ "$(rpm -qa php52s)" != "" ] ; then
 	yum remove php52s -y
-	sh /script/phpm-installer php53s
+	sh /script/phpm-installer php56s
 fi
 
 if [ "$(rpm -qa php53s)" != "" ] ; then
 	yum remove php53s* -y
 	rpm -e php53s-fpm --noscript
-
-	sh /script/phpm-installer php53s
+	sh /script/phpm-installer php56s
 fi
 
 if [ "$(rpm -qa mysql56u)" != "" ] ; then
