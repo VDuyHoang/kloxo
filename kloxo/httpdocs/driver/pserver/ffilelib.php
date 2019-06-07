@@ -135,7 +135,7 @@ class Ffile extends Lxclass
 		// MR -- trouble if $root with format '__path_' and then converted!
 		if (strpos($root, '__path_') !== false) {
 			$a = explode('/', $root);
-			$a[0] = $sgbl->$a[0];
+			$a[0] = $sgbl->{$a[0]};
 			$this->root = implode('/', $a);
 		} else {
 			$this->root = $root;
@@ -1445,7 +1445,7 @@ class Ffile extends Lxclass
 
 		$this->duflag = $gbl->getSessionV('ffile_duflag');
 		$gbl->setSessionV('ffile_duflag', false);
-		$this->numlines = $numlines;
+		$this->numlines = $numlines;		
 		$stat = rl_exec_get($this->__masterserver, $this->__readserver, array("coreFfile", "getLxStat"), 
 			array($this->__username_o, $this->root, $this->getFullPath(), $numlines, $this->duflag));
 

@@ -1500,7 +1500,7 @@ STRIN;
 	function getFfileFromVirtualList($name)
 	{
 		$name = coreFfile::getRealpath($name);
-		$name = '/' . $name;
+		$name = '/' . $name;		
 		$ffile = new Ffile($this->__masterserver, $this->__readserver, "__path_root_base", $name, $this->username);
 		$ffile->__parent_o = $this;
 		$ffile->get();
