@@ -13,7 +13,7 @@ echo
 echo "- For help, type '$0 --help'"
 
 if [ "$#" == 0 ] ; then
-	echo "- No argument supplied. Defaulting to 'fpm'"
+	echo "- No argument supplied. Defaulting to 'fpm' and 'php56s'"
 	echo
 fi
 
