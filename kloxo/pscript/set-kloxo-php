@@ -30,11 +30,7 @@ fi
 	chmod 0440 /etc/sudoers.d/mount
 #fi
 
-<<<<<<< HEAD
 if [ -z "${2}" ] ; then
-=======
-if [ "${2}" == "" ] ; then
->>>>>>> 8448a8973218bc2507c465c17312fcf8ac9422a6
 	echo "- No php selected. Defaulting to 'php56s'"
 	echo
 	echo "php56s" > /usr/local/lxlabs/kloxo/init/kloxo_php_active	
