@@ -8395,7 +8395,7 @@ function setAllWebServerInstall($nolog = null)
 	if (file_exists("../etc/flag/use_apache24.flg")) {
 		$use_apache24 = true;
 	} else {
-		if (version_compare(getRpmVersion('httpd'), '2.4.0', '>')) {
+		if (version_compare(getRpmVersion('httpd*'), '2.4.0', '>')) {
 			$use_apache24 = true;
 			exec("echo '' > ../etc/flag/use_apache24.flg");
 		} else {
