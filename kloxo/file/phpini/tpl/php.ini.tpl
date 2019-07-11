@@ -89,24 +89,6 @@ cgi.fix_pathinfo = 1
 cgi.rfc2616_headers = 0
 
 ;### MR -- specific for php 5.3+
-<<<<<<< HEAD
-<?php echo $php53enable; ?>auto_globals_jit = On
-zlib.output_compression = <?php echo $output_compression_flag; ?>
-
-<?php echo $php53enable; ?>zlib.output_compression_level = 6
-<?php echo $php53enable; ?>implicit_flush = Off
-<?php echo $php53enable; ?>unserialize_callback_func =
-<?php echo $php53enable; ?>serialize_precision = 17
-<?php echo $php53enable; ?>zend.enable_gc = On
-<?php echo $php53enable; ?>expose_php = Off
-<?php echo $php53enable; ?>max_execution_time = 30
-<?php echo $php53enable; ?>max_input_time = 60
-<?php echo $php53enable; ?>unserialize_callback_func =
-<?php echo $php53enable; ?>ignore_repeated_source = Off
-<?php echo $php53enable; ?>report_memleaks = On
-<?php echo $php53enable; ?>html_errors = On
-<?php echo $php53enable; ?>auto_append_file =
-=======
 <?=$php53enable;?>auto_globals_jit = On
 zlib.output_compression = <?=$output_compression_flag;?>
 
@@ -123,7 +105,6 @@ zlib.output_compression = <?=$output_compression_flag;?>
 <?=$php53enable;?>report_memleaks = On
 <?=$php53enable;?>html_errors = On
 <?=$php53enable;?>auto_append_file =
->>>>>>> 0b9e91744c29e40fee69df776e2b5fdef84b6187
 
 ;### MR -- custom setting (handle by kloxo)
 disable_functions = <?=$disable_functions;?>
