@@ -188,12 +188,14 @@ chown mysql:mysql /var/lib/mysqltmp
 sh /script/disable-mysql-aio
 sh /script/set-mysql-default
 
-# install latest php for kloxo panel
-phpused="$(yum list | grep -o "php5[0-9]u-cli" | tail -1)"
-if [ "$phpused" != "" ] ; then
-	phpused=${phpused:0:5}	
+if [ "$(yum list|grep ^'php56u')" != "" ] ; then
+	phpused="php56"
+#	yum -y install ${phpused}u-cli ${phpused}u-mysqlnd ${phpused}u-fpm
+	sh /script/php-branch-installer ${phpused}u
 else
-    phpused="php54"	
+	phpused="php54"
+#	yum -y install ${phpused}-cli ${phpused}-mysqlnd ${phpused}-fpm
+	sh /script/php-branch-installer ${phpused}u
 fi
 sh /script/php-branch-installer ${phpused}u
 
