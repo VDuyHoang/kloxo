@@ -8401,8 +8401,7 @@ function setAllWebServerInstall($nolog = null)
 		} else {
 			$use_apache24 = false;
 		}
-	}
-	log_cleanup("- Use apache24 {$use_apache24}", $nolog);
+	}	
 	foreach ($list as $k => $v) {
 		$confpath = "/opt/configs/{$v}/etc/conf";
 
