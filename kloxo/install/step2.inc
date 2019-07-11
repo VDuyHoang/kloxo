@@ -198,6 +198,7 @@ kloxo_install_step1() {
 
 	echo ">>> Add certain components (like curl/contabs/rkhunter) <<<"
 
+<<<<<<< HEAD
 	## MR -- install curl-devel (need by php-common) will be install curl-devel
 	## in CentOS 5 and libcurl-devel in CentOS 6
 	yum -y install tnef which gcc cpp gcc-c++ zip unzip curl-devel libcurl-devel autoconf \
@@ -207,6 +208,9 @@ kloxo_install_step1() {
 		 xz xz-libs p7zip p7zip-plugins rar unrar lxjailshell --skip-broken
 
 	rkhunter --update
+=======
+	sh /script/rkhunter-installer
+>>>>>>> 0b9e91744c29e40fee69df776e2b5fdef84b6187
 
 	echo ">>> Add Standard PHP components and Hiawatha <<<"
 	## MR -- xcache, zend, ioncube, suhosin and zts not default install
@@ -372,7 +376,7 @@ kloxo_install_before_bye() {
 
 kloxo_install_bye() {
 	## MR -- use '-i' instead '-I' because not exists in CentOS 5
-	this_ip=$(hostname -i|awk '{print $1}')
+	this_ip=$(ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')
 	len=${#this_ip}
 
 	https_spc=""
@@ -446,7 +450,11 @@ lxins_main() {
 	## MR -- to make sure /tmp ready for all; found mysql not able to start if not 1777
 	chmod 1777 /tmp
 
+<<<<<<< HEAD
 	##sh /script/set-limits
+=======
+	sh /script/fix-limits
+>>>>>>> 0b9e91744c29e40fee69df776e2b5fdef84b6187
 
 	install_yum_repo
 

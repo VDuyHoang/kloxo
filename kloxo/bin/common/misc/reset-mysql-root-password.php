@@ -2,7 +2,9 @@
 
 include_once "lib/html/include.php";
 
-$tpath = "/usr/local/lxlabs/kloxo/serverfile";
+// MR -- make trouble for reset password if serverfile dir not exists
+// $tpath = "/usr/local/lxlabs/kloxo/serverfile";
+$tpath = "/tmp";
 
 if (isset($argv[1])) {
 	$pass = $argv[1];
@@ -29,7 +31,7 @@ if (isServiceExists('mysqld')) {
 
 print("MySQL ROOT password reset...\n");
 sleep(10);
-system("mysqld_safe --skip-grant-tables --init-file={$tpath}/reset-mysql-password.sql >/dev/null 2>&1 &");
+system("mysql --no-auto-restart --skip-grant-tables --init-file={$tpath}/reset-mysql-password.sql >/dev/null 2>&1 &");
 sleep(15);
 
 print("Start MySQL service...\n");

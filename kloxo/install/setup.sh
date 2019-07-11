@@ -160,7 +160,10 @@ cd /
 
 #yum clean all
 
-yum remove -y bind* nsd* pdns* mydns* yadifa* maradns djbdns* mysql* mariadb* MariaDB* php* \
+yum -y install wget zip unzip yum-utils yum-priorities yum-plugin-replace \
+	vim-minimal subversion curl sudo expect --skip-broken
+
+yum remove -y bind* nsd* pdns* mydns* yadifa* maradns djbdns* mysql-* mariadb-* MariaDB-* php* \
 		httpd-* mod_* httpd24u* mod24u_* nginx* lighttpd* varnish* squid* trafficserver* \
 		*-toaster postfix* exim* opensmtpd* esmtp* libesmtp* libmhash*
 rpm -e pure-ftpd --noscripts
@@ -188,13 +191,11 @@ sh /script/set-mysql-default
 # install latest php for kloxo panel
 phpused="$(yum list | grep -o "php5[0-9]u-cli" | tail -1)"
 if [ "$phpused" != "" ] ; then
-	phpused=${phpused:0:5}
-	yum -y install ${phpused}u ${phpused}u-cli ${phpused}u-mysqlnd ${phpused}u-fpm
+	phpused=${phpused:0:5}	
 else
-    phpused="php54"
-	yum -y install ${phpused}-cli ${phpused}-mysqlnd ${phpused}-fpm
+    phpused="php54"	
 fi
-
+sh /script/php-branch-installer ${phpused}u
 
 chkconfig php-fpm on >/dev/null 2>&1
 	

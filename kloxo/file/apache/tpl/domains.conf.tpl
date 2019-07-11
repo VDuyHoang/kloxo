@@ -6,7 +6,7 @@ if (file_exists($altconf)) {
 	return;
 }
 ?>
-### begin - web of '<?= $domainname; ?>' - do not remove/modify this line
+### begin - web of '<?=$domainname;?>' - do not remove/modify this line
 
 <?php
 
@@ -150,7 +150,11 @@ if ($general_header) {
 		$general_header_text = "<IfModule mod_headers.c>\n";
 
 		foreach ($gh as $k => $v) {
-			$general_header_text .= "\t\tHeader always set {$v}\n";
+			if (stripos($v, 'x-powered-by') !== false) {
+				// no action
+			} else {
+				$general_header_text .= "\t\tHeader always set {$v}\n";
+			}
 		}
 
 		$general_header_text .= "\t\tHeader always set X-Supported-By \"Kloxo-MR 7.0\"\n" .
@@ -844,7 +848,7 @@ foreach ($certnamelist as $ip => $certname) {
 			ProxyErrorOverride On
 			ProxyPass /error !
 			ErrorDocument 500 /error/500.html
-			<Proxy "unix:/opt/configs/php-fpm/sock/<?=$phpselected;?> -apache.sock|fcgi://localhost">
+			<Proxy "unix:/opt/configs/php-fpm/sock/<?=$phpselected;?>-apache.sock|fcgi://localhost">
 				ProxySet timeout=<?=$timeout;?>
 
 				ProxySet connectiontimeout=<?=$timeout;?>
