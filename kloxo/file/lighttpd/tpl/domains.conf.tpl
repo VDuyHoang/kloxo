@@ -169,7 +169,7 @@ if ($general_header) {
 		if (stripos($key, 'x-powered-by') !== false) {
 			// no action
 		} else {
-			$general_header_text .= "\tsetenv.add-response-header += ( \"{$key}\" => \"{$value}\" )\n";
+			$general_header_text .= "\tsetenv.add-response-header += ( \"{$key}\" => \"{$value}\ )\n";
 		}
 	}
 
