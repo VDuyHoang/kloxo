@@ -132,7 +132,7 @@ install_others() {
 	echo ">>> Install OTHER services <<<"
 
 	yum -y install pure-ftpd webalizer cronie cronie-anacron crontabs vixie-cron \
-		rpmdevtools yum-utils --skip-broken
+		rpmdevtools yum-utils procps-ng psmisc --skip-broken
 }
 
 kloxo_vpopmail() {
@@ -144,7 +144,8 @@ kloxo_vpopmail() {
 
 	echo ">>> Fix Vpopmail settings <<<"
 
-	echo 'SPAMDOPTIONS=" -v -d -p 783 -u vpopmail"' > /etc/sysconfig/spamassassin
+	#echo 'SPAMDOPTIONS="-i 127.0.0.1 -A 127.0.0.1 -v -d -p 783 -u vpopmail"' > /etc/sysconfig/spamassassin
+	'cp' -f /usr/local/lxlabs/kloxo/file/spamassassin/etc/sysconfig/spamassassin /etc/sysconfig/spamassassin
 
 	## MR -- until Kloxo-MR 7.0.0, still using the same mail path
 	mkdir -p /home/lxadmin/mail/domains
