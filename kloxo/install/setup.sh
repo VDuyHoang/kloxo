@@ -205,8 +205,8 @@ fi
 kloxophp="$(yum list | grep -o "php7[0-9]u-cli" | tail -1)"
 kloxophp=${kloxophp:0:5}
 mkdir -p /opt/${kloxophp}s/custom
-#sh /script/set-kloxo-php cgi ${kloxophp}s
-sh /script/phpm-installer ${kloxophp}s -y
+sh /script/set-kloxo-php fpm ${kloxophp}s
+#sh /script/phpm-installer ${kloxophp}s -y
 sh /script/fixlxphpexe ${kloxophp}s
 
 cd /

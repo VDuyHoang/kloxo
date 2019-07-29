@@ -281,7 +281,7 @@ abstract class Lxdb extends Lxclass
 				break;
 
 			case "add" :
-				error_log("writeToDb:".var_dump($this));
+				error_log("writeToDb: ".json_encode($this));
 				$dbupdate->addRowObject($this);
 
 				break;
