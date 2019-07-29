@@ -518,7 +518,7 @@ class Sqlite
 
 			exit;
 		}
-
+		log_database("DbError: ->addRow ".var_dump($array));
 		$string = $this->createQueryStringAdd($array);
 
 	//	$insert = "insert into $this->__sqtable $string ;";
